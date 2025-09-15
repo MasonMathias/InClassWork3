@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: DefaultTabController(
-        length: 4,
+        length: 8, // updated to 8
         child: _TabsNonScrollableDemo(),
       ),
     );
@@ -41,7 +41,7 @@ class __TabsNonScrollableDemoState extends State<_TabsNonScrollableDemo>
     super.initState();
     _tabController = TabController(
       initialIndex: 0,
-      length: 4,
+      length: 8, // updated to 8
       vsync: this,
     );
     _tabController.addListener(() {
@@ -60,92 +60,40 @@ class __TabsNonScrollableDemoState extends State<_TabsNonScrollableDemo>
 
   @override
   Widget build(BuildContext context) {
-// For the To do task hint: consider defining the widget and name of the tabs here
-    final tabs = ['TextWidget', 'ImageWidget', 'ButtonWidget', 'ListViewWidget'];
+    // Updated tab names
+    final tabs = [
+      'main',
+      'sunday',
+      'monday',
+      'tuesday',
+      'wednesday',
+      'thursday',
+      'friday',
+      'saturday',
+    ];
 
     return Scaffold(
-
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text(
-          'Tabs Demo',
-        ),
+        title: Text('Tabs Demo'),
         bottom: TabBar(
           controller: _tabController,
-          isScrollable: false,
+          isScrollable: true, // better since we now have 8 tabs
           tabs: [
             for (final tab in tabs) Tab(text: tab),
           ],
         ),
       ),
-
       body: TabBarView(
         controller: _tabController,
         children: [
-
-          Center( // TEXT AND ALERT TAB
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Text('Stylized text', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
-                const SizedBox(height: 8),
-                ElevatedButton(
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (_) => AlertDialog(
-                        title: const Text('Hello'),
-                        content: const Text('Alert Dialogue'),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.pop(context),
-                            child: const Text('OK'),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                  child: const Text('Show Alert'),
-                ),
-              ],
+          for (final tab in tabs)
+            Center(
+              child: Text(
+                'Content for $tab tab',
+                style: TextStyle(fontSize: 20),
+              ),
             ),
-          ),
-
-          Center( // IMAGE TAB
-            child: Image.network(
-	              'https://i.imgur.com/CzXTtJV.jpg',
-	              width: 300,
-	              height: 300,
-	            ),
-          ),
-
-          Center( // BUTTON TAB
-            child: ElevatedButton(
-               onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Button pressed in ${tabs[2]} tab!'),),
-                );
-              },
-              child: Text('Click me'),
-            ),
-          ),
-
-          Center( // LISTVIEW TAB
-            child: ListView(
-              children: const [
-                Card(
-                  child: ListTile(leading: Icon(Icons.list), title: Text('Item 1'), subtitle: Text('Details about item 1'),),
-                ),
-                Card(
-                  child: ListTile(leading: Icon(Icons.list), title: Text('Item 2'), subtitle: Text('Details about item 2'),),
-                ),
-                Card(
-                  child: ListTile(leading: Icon(Icons.list), title: Text('Item 3'), subtitle: Text('Details about item 3'),),
-                ),
-              ],
-            ),
-          ),
-
         ],
       ),
     );
