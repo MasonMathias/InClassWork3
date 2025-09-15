@@ -61,14 +61,14 @@ class __TabsNonScrollableDemoState extends State<_TabsNonScrollableDemo>
   @override
   Widget build(BuildContext context) {
 // For the To do task hint: consider defining the widget and name of the tabs here
-    final tabs = ['TextWidget', 'ImageWidget', 'ButtonWidget', 'ListViewWidget'];
+    final tabs = ['Pet 1', 'Pet 2', 'Pet 3', 'Pet 4'];
 
     return Scaffold(
 
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text(
-          'Tabs Demo',
+          'Digital Pet Demo',
         ),
         bottom: TabBar(
           controller: _tabController,
@@ -83,67 +83,20 @@ class __TabsNonScrollableDemoState extends State<_TabsNonScrollableDemo>
         controller: _tabController,
         children: [
 
-          Center( // TEXT AND ALERT TAB
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Text('Stylized text', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
-                const SizedBox(height: 8),
-                ElevatedButton(
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (_) => AlertDialog(
-                        title: const Text('Hello'),
-                        content: const Text('Alert Dialogue'),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.pop(context),
-                            child: const Text('OK'),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                  child: const Text('Show Alert'),
-                ),
-              ],
-            ),
+          Center( // Pet 1 TAB
+            
           ),
 
-          Center( // IMAGE TAB
-            child: Image.network(
-	              'https://i.imgur.com/CzXTtJV.jpg',
-	              width: 300,
-	              height: 300,
-	            ),
+          Center( // Pet 2 TAB
+            
           ),
 
-          Center( // BUTTON TAB
-            child: ElevatedButton(
-               onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Button pressed in ${tabs[2]} tab!'),),
-                );
-              },
-              child: Text('Click me'),
-            ),
+          Center( // Pet 3 TAB
+            
           ),
 
-          Center( // LISTVIEW TAB
-            child: ListView(
-              children: const [
-                Card(
-                  child: ListTile(leading: Icon(Icons.list), title: Text('Item 1'), subtitle: Text('Details about item 1'),),
-                ),
-                Card(
-                  child: ListTile(leading: Icon(Icons.list), title: Text('Item 2'), subtitle: Text('Details about item 2'),),
-                ),
-                Card(
-                  child: ListTile(leading: Icon(Icons.list), title: Text('Item 3'), subtitle: Text('Details about item 3'),),
-                ),
-              ],
-            ),
+          Center( // Pet 4 TAB
+            
           ),
 
         ],
