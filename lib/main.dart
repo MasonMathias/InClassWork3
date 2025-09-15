@@ -84,19 +84,19 @@ class __TabsNonScrollableDemoState extends State<_TabsNonScrollableDemo>
         children: [
 
           Center( // Pet 1 TAB
-            
+            child: Image.network('https://static.vecteezy.com/system/resources/thumbnails/053/242/313/small/endearing-baby-toy-spaniel-dog-sitting-clipart-vector.jpg')
           ),
 
           Center( // Pet 2 TAB
-            
+            child: Image.network('https://www.shutterstock.com/image-vector/cat-kitten-sitting-face-head-600nw-2422795839.jpg')
           ),
 
           Center( // Pet 3 TAB
-            
+            child: Image.network('https://i.etsystatic.com/13434992/r/il/7cb82b/3712276052/il_570xN.3712276052_7w8r.jpg')
           ),
 
           Center( // Pet 4 TAB
-            
+            child: Image.network('https://media.istockphoto.com/id/929253078/vector/budgerigar-isolated-on-white-background-vector-illustration.jpg?s=612x612&w=0&k=20&c=po-njcI5Q1KXbKTxoGMX71U1SjByr_UnIv-_UPULdPU=')
           ),
 
         ],
