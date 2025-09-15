@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: DefaultTabController(
-        length: 4,
+        length: 8,
         child: _TabsNonScrollableDemo(),
       ),
     );
@@ -41,7 +41,7 @@ class __TabsNonScrollableDemoState extends State<_TabsNonScrollableDemo>
     super.initState();
     _tabController = TabController(
       initialIndex: 0,
-      length: 4,
+      length: 8,
       vsync: this,
     );
     _tabController.addListener(() {
@@ -61,7 +61,7 @@ class __TabsNonScrollableDemoState extends State<_TabsNonScrollableDemo>
   @override
   Widget build(BuildContext context) {
 // For the To do task hint: consider defining the widget and name of the tabs here
-    final tabs = ['Pet 1', 'Pet 2', 'Pet 3', 'Pet 4'];
+    final tabs = ['Main', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
     return Scaffold(
 
@@ -83,20 +83,36 @@ class __TabsNonScrollableDemoState extends State<_TabsNonScrollableDemo>
         controller: _tabController,
         children: [
 
-          Center( // Pet 1 TAB
-            child: Image.network('https://static.vecteezy.com/system/resources/thumbnails/053/242/313/small/endearing-baby-toy-spaniel-dog-sitting-clipart-vector.jpg')
+          Center( // Main
+
           ),
 
-          Center( // Pet 2 TAB
-            child: Image.network('https://www.shutterstock.com/image-vector/cat-kitten-sitting-face-head-600nw-2422795839.jpg')
+          Center( // Monday
+
           ),
 
-          Center( // Pet 3 TAB
-            child: Image.network('https://www.shutterstock.com/image-vector/cute-cartoon-budgie-drawing-little-260nw-1429548065.jpg')
+          Center( // Tuesday
+
           ),
 
-          Center( // Pet 4 TAB
-            child: Image.network('https://media.istockphoto.com/id/929253078/vector/budgerigar-isolated-on-white-background-vector-illustration.jpg?s=612x612&w=0&k=20&c=po-njcI5Q1KXbKTxoGMX71U1SjByr_UnIv-_UPULdPU=')
+          Center( // Wednesday
+
+          ),
+
+          Center( // Thursday
+
+          ),
+
+          Center( // Friday
+
+          ),
+
+          Center( // Saturday
+
+          ),
+
+          Center( // Sunday
+
           ),
 
         ],
