@@ -5,6 +5,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -60,7 +62,6 @@ class __TabsNonScrollableDemoState extends State<_TabsNonScrollableDemo>
 
   @override
   Widget build(BuildContext context) {
-// For the To do task hint: consider defining the widget and name of the tabs here
     final tabs = ['Main', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
     return Scaffold(
@@ -68,7 +69,7 @@ class __TabsNonScrollableDemoState extends State<_TabsNonScrollableDemo>
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text(
-          'Digital Pet Demo',
+          '7-Day Weather App Demo',
         ),
         bottom: TabBar(
           controller: _tabController,
@@ -87,9 +88,11 @@ class __TabsNonScrollableDemoState extends State<_TabsNonScrollableDemo>
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
-                  'Main'
-                )
+
+                // Fetch weather button
+
+                // text box to enter city name
+                
               ],
             )
           ),
@@ -101,15 +104,15 @@ class __TabsNonScrollableDemoState extends State<_TabsNonScrollableDemo>
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    'City:'
+                    'City: placeholder city' // just keep the place holder for now
                   ),
 
                   Text(
-                    'Temperature:'
+                    'Temperature: placeholder temp' // random temp between 15c and 30c
                   ),
 
                   Text(
-                    'Weather condition:'
+                    'Weather condition: rainy' // randomly select between [sunny, rainy, cloudy]
                   ),
                 ],
               ),
