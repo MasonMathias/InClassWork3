@@ -26,6 +26,7 @@ class __TabsNonScrollableDemoState extends State<_TabsNonScrollableDemo>
   late TabController _tabController;
 
   final RestorableInt tabIndex = RestorableInt(0);
+  final TextEditingController _textController = TextEditingController();
 
   @override
   String get restorationId => 'tab_non_scrollable_demo';
@@ -55,21 +56,18 @@ class __TabsNonScrollableDemoState extends State<_TabsNonScrollableDemo>
   void dispose() {
     _tabController.dispose();
     tabIndex.dispose();
+    _textController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-// For the To do task hint: consider defining the widget and name of the tabs here
-    final tabs = ['TextWidget', 'ImageWidget', 'ButtonWidget', 'ListViewWidget'];
+    final tabs = ['input', 'dog', 'cat', 'bird'];
 
     return Scaffold(
-
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text(
-          'Tabs Demo',
-        ),
+        title: Text('Tabs Demo'),
         bottom: TabBar(
           controller: _tabController,
           isScrollable: false,
@@ -78,74 +76,64 @@ class __TabsNonScrollableDemoState extends State<_TabsNonScrollableDemo>
           ],
         ),
       ),
-
       body: TabBarView(
         controller: _tabController,
         children: [
-
-          Center( // TEXT AND ALERT TAB
+          // Input Tab
+          Padding(
+            padding: const EdgeInsets.all(16.0),
             child: Column(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text('Stylized text', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
-                const SizedBox(height: 8),
-                ElevatedButton(
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (_) => AlertDialog(
-                        title: const Text('Hello'),
-                        content: const Text('Alert Dialogue'),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.pop(context),
-                            child: const Text('OK'),
-                          ),
-                        ],
-                      ),
-                    );
+                Text("Enter 'dog', 'cat', or 'bird' to switch tabs:"),
+                SizedBox(height: 10),
+                TextField(
+                  controller: _textController,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Type a tab name',
+                  ),
+                  onSubmitted: (value) {
+                    final index = tabs.indexOf(value.toLowerCase());
+                    if (index != -1 && index != 0) {
+                      _tabController.animateTo(index);
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text("Invalid tab name")),
+                      );
+                    }
                   },
-                  child: const Text('Show Alert'),
                 ),
               ],
             ),
           ),
 
-          Center( // IMAGE TAB
+          // Dog Tab
+          Center(
             child: Image.network(
-	              'https://i.imgur.com/CzXTtJV.jpg',
-	              width: 300,
-	              height: 300,
-	            ),
-          ),
-
-          Center( // BUTTON TAB
-            child: ElevatedButton(
-               onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Button pressed in ${tabs[2]} tab!'),),
-                );
-              },
-              child: Text('Click me'),
+              'https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*',
+              width: 300,
+              height: 300,
             ),
           ),
 
-          Center( // LISTVIEW TAB
-            child: ListView(
-              children: const [
-                Card(
-                  child: ListTile(leading: Icon(Icons.list), title: Text('Item 1'), subtitle: Text('Details about item 1'),),
-                ),
-                Card(
-                  child: ListTile(leading: Icon(Icons.list), title: Text('Item 2'), subtitle: Text('Details about item 2'),),
-                ),
-                Card(
-                  child: ListTile(leading: Icon(Icons.list), title: Text('Item 3'), subtitle: Text('Details about item 3'),),
-                ),
-              ],
+          // Cat Tab
+          Center(
+            child: Image.network(
+              'https://i.imgur.com/CzXTtJV.jpg',
+              width: 300,
+              height: 300,
             ),
           ),
 
+          // Bird Tab
+          Center(
+            child: Image.network(
+              'https://cdn.britannica.com/10/250610-050-BC5CCDAF/Zebra-finch-Taeniopygia-guttata-bird.jpg',
+              width: 300,
+              height: 300,
+            ),
+          ),
         ],
       ),
     );
