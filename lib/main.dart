@@ -82,39 +82,38 @@ class __TabsNonScrollableDemoState extends State<_TabsNonScrollableDemo>
       body: TabBarView(
         controller: _tabController,
         children: [
-
-          Center( // Main
-
+          // MAIN
+          Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'Main'
+                )
+              ],
+            )
           ),
 
-          Center( // Monday
+          // Days of the week
+          for (int i = 1; i < tabs.length; i++)
+            Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'City:'
+                  ),
 
-          ),
+                  Text(
+                    'Temperature:'
+                  ),
 
-          Center( // Tuesday
-
-          ),
-
-          Center( // Wednesday
-
-          ),
-
-          Center( // Thursday
-
-          ),
-
-          Center( // Friday
-
-          ),
-
-          Center( // Saturday
-
-          ),
-
-          Center( // Sunday
-
-          ),
-
+                  Text(
+                    'Weather condition:'
+                  ),
+                ],
+              ),
+            ),
         ],
       ),
     );
