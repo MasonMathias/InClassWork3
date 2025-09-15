@@ -92,7 +92,7 @@ class __TabsNonScrollableDemoState extends State<_TabsNonScrollableDemo>
           ),
 
           Center( // Pet 3 TAB
-            child: Image.network('https://i.etsystatic.com/13434992/r/il/7cb82b/3712276052/il_570xN.3712276052_7w8r.jpg')
+            child: Image.network('https://www.shutterstock.com/image-vector/cute-cartoon-budgie-drawing-little-260nw-1429548065.jpg')
           ),
 
           Center( // Pet 4 TAB
