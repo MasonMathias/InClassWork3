@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -27,6 +28,11 @@ class __TabsNonScrollableDemoState extends State<_TabsNonScrollableDemo>
 
   final RestorableInt tabIndex = RestorableInt(0);
   final TextEditingController _cityController = TextEditingController();
+
+  // Weather data state
+  String city = '';
+  String temperature = '';
+  String condition = '';
 
   @override
   String get restorationId => 'tab_non_scrollable_demo';
@@ -58,6 +64,25 @@ class __TabsNonScrollableDemoState extends State<_TabsNonScrollableDemo>
     tabIndex.dispose();
     _cityController.dispose();
     super.dispose();
+  }
+
+  // Function to simulate fetching weather
+  void _fetchWeather(String inputCity) {
+    final random = Random();
+
+    final temp = 15 + random.nextInt(16); // 15 to 30
+    final conditions = ['Sunny', 'Cloudy', 'Rainy'];
+    final selectedCondition = conditions[random.nextInt(conditions.length)];
+
+    setState(() {
+      city = inputCity.isEmpty ? 'Unknown' : inputCity;
+      temperature = '$temp°C';
+      condition = selectedCondition;
+    });
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Weather fetched for $city')),
+    );
   }
 
   @override
@@ -105,10 +130,7 @@ class __TabsNonScrollableDemoState extends State<_TabsNonScrollableDemo>
                 const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {
-                    final city = _cityController.text;
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Fetching weather for $city...')),
-                    );
+                    _fetchWeather(_cityController.text);
                   },
                   child: const Text('Fetch Weather'),
                 ),
@@ -116,17 +138,22 @@ class __TabsNonScrollableDemoState extends State<_TabsNonScrollableDemo>
             ),
           ),
 
-          // OTHER TABS (placeholders)
+          // OTHER TABS (show weather data placeholders)
           for (int i = 1; i < tabs.length; i++)
             Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-                children: const [
-                  Text('City: [Placeholder]', style: TextStyle(fontSize: 20)),
-                  SizedBox(height: 8),
-                  Text('Temperature: [Placeholder]', style: TextStyle(fontSize: 20)),
-                  SizedBox(height: 8),
-                  Text('Condition: [Placeholder]', style: TextStyle(fontSize: 20)),
+                children: [
+                  Text('City: ${city.isEmpty ? "[Placeholder]" : city}',
+                      style: TextStyle(fontSize: 20)),
+                  const SizedBox(height: 8),
+                  Text(
+                      'Temperature: ${temperature.isEmpty ? "[Placeholder]" : temperature}',
+                      style: TextStyle(fontSize: 20)),
+                  const SizedBox(height: 8),
+                  Text(
+                      'Condition: ${condition.isEmpty ? "[Placeholder]" : condition}',
+                      style: TextStyle(fontSize: 20)),
                 ],
               ),
             ),
