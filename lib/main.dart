@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: DefaultTabController(
-        length: 8, // updated to 8
+        length: 8,
         child: _TabsNonScrollableDemo(),
       ),
     );
@@ -41,7 +41,7 @@ class __TabsNonScrollableDemoState extends State<_TabsNonScrollableDemo>
     super.initState();
     _tabController = TabController(
       initialIndex: 0,
-      length: 8, // updated to 8
+      length: 8,
       vsync: this,
     );
     _tabController.addListener(() {
@@ -60,16 +60,16 @@ class __TabsNonScrollableDemoState extends State<_TabsNonScrollableDemo>
 
   @override
   Widget build(BuildContext context) {
-    // Updated tab names
+    // Capitalized tab names
     final tabs = [
-      'main',
-      'sunday',
-      'monday',
-      'tuesday',
-      'wednesday',
-      'thursday',
-      'friday',
-      'saturday',
+      'MAIN',
+      'SUNDAY',
+      'MONDAY',
+      'TUESDAY',
+      'WEDNESDAY',
+      'THURSDAY',
+      'FRIDAY',
+      'SATURDAY',
     ];
 
     return Scaffold(
@@ -78,7 +78,7 @@ class __TabsNonScrollableDemoState extends State<_TabsNonScrollableDemo>
         title: Text('Tabs Demo'),
         bottom: TabBar(
           controller: _tabController,
-          isScrollable: true, // better since we now have 8 tabs
+          isScrollable: true, // allows scrolling with 8 tabs
           tabs: [
             for (final tab in tabs) Tab(text: tab),
           ],
