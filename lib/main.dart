@@ -83,7 +83,7 @@ class __TabsNonScrollableDemoState extends State<_TabsNonScrollableDemo>
         controller: _tabController,
         children: [
 
-          Center( // TEXT AND ALERT TAB
+          Center( // TEXT AND ALERT TAB lol
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
