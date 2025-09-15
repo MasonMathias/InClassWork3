@@ -26,6 +26,7 @@ class __TabsNonScrollableDemoState extends State<_TabsNonScrollableDemo>
   late TabController _tabController;
 
   final RestorableInt tabIndex = RestorableInt(0);
+  final TextEditingController _cityController = TextEditingController();
 
   @override
   String get restorationId => 'tab_non_scrollable_demo';
@@ -55,6 +56,7 @@ class __TabsNonScrollableDemoState extends State<_TabsNonScrollableDemo>
   void dispose() {
     _tabController.dispose();
     tabIndex.dispose();
+    _cityController.dispose();
     super.dispose();
   }
 
@@ -78,7 +80,7 @@ class __TabsNonScrollableDemoState extends State<_TabsNonScrollableDemo>
         title: Text('Tabs Demo'),
         bottom: TabBar(
           controller: _tabController,
-          isScrollable: true, // allows scrolling with 8 tabs
+          isScrollable: true,
           tabs: [
             for (final tab in tabs) Tab(text: tab),
           ],
@@ -87,11 +89,45 @@ class __TabsNonScrollableDemoState extends State<_TabsNonScrollableDemo>
       body: TabBarView(
         controller: _tabController,
         children: [
-          for (final tab in tabs)
+          // MAIN TAB (City input + Fetch button)
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  controller: _cityController,
+                  decoration: InputDecoration(
+                    labelText: 'Enter city name',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                ElevatedButton(
+                  onPressed: () {
+                    final city = _cityController.text;
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Fetching weather for $city...')),
+                    );
+                  },
+                  child: const Text('Fetch Weather'),
+                ),
+              ],
+            ),
+          ),
+
+          // OTHER TABS (placeholders)
+          for (int i = 1; i < tabs.length; i++)
             Center(
-              child: Text(
-                'Content for $tab tab',
-                style: TextStyle(fontSize: 20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: const [
+                  Text('City: [Placeholder]', style: TextStyle(fontSize: 20)),
+                  SizedBox(height: 8),
+                  Text('Temperature: [Placeholder]', style: TextStyle(fontSize: 20)),
+                  SizedBox(height: 8),
+                  Text('Condition: [Placeholder]', style: TextStyle(fontSize: 20)),
+                ],
               ),
             ),
         ],
