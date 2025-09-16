@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 void main() {
   runApp(MyApp());
@@ -6,7 +7,6 @@ void main() {
 
 class MyApp extends StatelessWidget {
   
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -56,8 +56,28 @@ class __TabsNonScrollableDemoState extends State<_TabsNonScrollableDemo>
   @override
   void dispose() {
     _tabController.dispose();
+    _cityController.dispose();
     tabIndex.dispose();
     super.dispose();
+  }
+
+  final TextEditingController _cityController = TextEditingController();
+
+  String city = "placeholder city";
+  String temperature = "placeholder temp";
+  String condition = "rainy";
+
+  void fetchWeather() {
+    final r = Random();
+    final temp = 15 + r.nextInt(16); // 15–30
+    const options = ['sunny', 'rainy', 'cloudy'];
+    final cond = options[r.nextInt(options.length)];
+
+    setState(() {
+      city = _cityController.text.isEmpty ? "Unknown city" : _cityController.text;
+      temperature = "$temp °C";
+      condition = cond;
+  });
   }
 
   @override
@@ -90,9 +110,19 @@ class __TabsNonScrollableDemoState extends State<_TabsNonScrollableDemo>
               children: [
 
                 // Fetch weather button
+                ElevatedButton(
+                  onPressed: fetchWeather,
+                  child: const Text("Fetch Weather"),
+                ),
 
                 // text box to enter city name
-                
+                TextField(
+                  controller: _cityController,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: "Enter city",
+                  ),
+                ),
               ],
             )
           ),
