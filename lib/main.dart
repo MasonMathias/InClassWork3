@@ -133,17 +133,9 @@ class __TabsNonScrollableDemoState extends State<_TabsNonScrollableDemo>
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
-                    'City: placeholder city' // just keep the place holder for now
-                  ),
-
-                  Text(
-                    'Temperature: placeholder temp' // random temp between 15c and 30c
-                  ),
-
-                  Text(
-                    'Weather condition: rainy' // randomly select between [sunny, rainy, cloudy]
-                  ),
+                  Text("City: $city"),
+                  Text("Temperature: $temperature"),
+                  Text("Weather condition: $condition"),
                 ],
               ),
             ),
